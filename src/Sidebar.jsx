@@ -15,34 +15,34 @@ function Sidebar({ setDisplayContent }) {
   return (
     <div className="bg-white text-sky-900">
       <div className="lg:w-64 bg-white p-4 hidden lg:block">
-        <img src='/assets/revspire logo.webp' alt="Revspire Logo"></img>
+        <img src='/revspire logo.webp' alt="Revspire Logo"></img>
         <ul className="space-y-3">
           <li
             className={`flex items-center cursor-pointer ${activeItem === 'Content Portal' ? 'font-bold' : ''}`}
             onClick={() => handleClick('Content Portal')}
           >
-            <img className='px-2' src='/assets/activity.svg' alt="Activity Icon"></img>
+            <img className='px-2' src='/activity.svg' alt="Activity Icon"></img>
             <span>Content Portal</span>
           </li>
                   <li
           className={`flex items-center cursor-pointer ${activeItem === 'Pitch Manager' ? 'font-bold' : ''}`}
           onClick={() => handleClick('Pitch Manager')}
         >
-          <img className='px-2' src='/assets/category.svg' alt="Category Icon"></img>
+          <img className='px-2' src='/category.svg' alt="Category Icon"></img>
           <span>Pitch Manager</span>
         </li>
         <li
           className={`flex items-center cursor-pointer ${activeItem === 'Tag Manager' ? 'font-bold' : ''}`}
           onClick={() => handleClick('Tag Manager')}
         >
-          <img className='px-2' src='/assets/calendar.svg' alt="Calendar Icon"></img>
+          <img className='px-2' src='/calendar.svg' alt="Calendar Icon"></img>
           <span>Tag Manager</span>
         </li>
         <li
           className={`flex items-center cursor-pointer ${activeItem === 'About' ? 'font-bold' : ''}`}
           onClick={() => handleClick('About')}
         >
-          <img className='px-2' src='/assets/wallet.svg' alt="Wallet Icon"></img>
+          <img className='px-2' src='/wallet.svg' alt="Wallet Icon"></img>
           <span>About</span>
         </li>
         </ul>
@@ -70,34 +70,34 @@ function Sidebar({ setDisplayContent }) {
             </button>
           </div>
           <div className="p-4">
-            <img src='/assets/revspire logo.webp' alt="Revspire Logo"></img>
+            <img src='/revspire logo.webp' alt="Revspire Logo"></img>
             <ul className="space-y-3">
               <li
                 className={`flex items-center cursor-pointer ${activeItem === 'Content Portal' ? 'font-bold' : ''}`}
                 onClick={() => handleClick('Content Portal')}
               >
-                <img className='px-2' src='/assets/activity.svg' alt="Activity Icon"></img>
+                <img className='px-2' src='/activity.svg' alt="Activity Icon"></img>
                 <span>Content Portal</span>
               </li>
                       <li
           className={`flex items-center cursor-pointer ${activeItem === 'Pitch Manager' ? 'font-bold' : ''}`}
           onClick={() => handleClick('Pitch Manager')}
         >
-          <img className='px-2' src='/assets/category.svg' alt="Category Icon"></img>
+          <img className='px-2' src='/category.svg' alt="Category Icon"></img>
           <span>Pitch Manager</span>
         </li>
         <li
           className={`flex items-center cursor-pointer ${activeItem === 'Tag Manager' ? 'font-bold' : ''}`}
           onClick={() => handleClick('Tag Manager')}
         >
-          <img className='px-2' src='/assets/calendar.svg' alt="Calendar Icon"></img>
+          <img className='px-2' src='/calendar.svg' alt="Calendar Icon"></img>
           <span>Tag Manager</span>
         </li>
         <li
           className={`flex items-center cursor-pointer ${activeItem === 'About' ? 'font-bold' : ''}`}
           onClick={() => handleClick('About')}
         >
-          <img className='px-2' src='/assets/wallet.svg' alt="Wallet Icon"></img>
+          <img className='px-2' src='/wallet.svg' alt="Wallet Icon"></img>
           <span>About</span>
         </li>
 

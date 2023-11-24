@@ -90,7 +90,7 @@ function Sidebar({ setDisplayContent }) {
           className={`flex items-center cursor-pointer ${activeItem === 'Tag Manager' ? 'font-bold' : ''}`}
           onClick={() => handleClick('Tag Manager')}
         >
-          <img className='px-2' src='/src/assets/calendar.svg' alt="Calendar Icon"></img>
+          <img className='px-2' src='/assets/calendar.svg' alt="Calendar Icon"></img>
           <span>Tag Manager</span>
         </li>
         <li

@@ -1,21 +1,53 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
-function MainData({ content }) {
+function MainData() {
+  const [data, setData] = useState([]);
+
+// ...
+
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const response = await fetch('http://localhost:3000/view-content-and-folders-sorted', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          viewer_id: 'IGH141585754362',
+          folder_id: 'your_folder_id',
+          sortOption: 'type',
+          order: 'ASC',
+        }),
+      });
+
+      // ...
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  fetchData();
+}, []);
+
+
   return (
-    <div className="flex-1 bg-blue-400 p-4">
-      <h2 className="text-xl font-bold mb-4">Main Data</h2>
+    <div className="flex-1 bg-white p-4 shadow-md rounded-lg h-screen">
+      <h2 className="text-xl font-bold mb-4 text-sky-700">Main Data</h2>
       <table>
         <thead>
           <tr>
-            <th>{content} Table Header</th>
+            <th>Name</th>
             {/* Add more table headers as needed */}
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>test1</td>
-            {/* Add more table data as needed */}
-          </tr>
+          {data.map((item, index) => (
+            <tr key={index}>
+              <td>{item.name}</td>
+              {/* Render other data fields */}
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

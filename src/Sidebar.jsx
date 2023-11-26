@@ -13,8 +13,8 @@ function Sidebar({ setDisplayContent }) {
   };
 
   return (
-    <div className="bg-white text-sky-900">
-      <div className="lg:w-64 bg-white p-4 hidden lg:block">
+    <div className=" text-sky-900">
+      <div className="lg:w-64 p-4 hidden lg:block">
         <img src='./assets/revspire logo.webp' alt="Revspire Logo"></img>
         <ul className="space-y-3">
           <li
@@ -60,7 +60,7 @@ function Sidebar({ setDisplayContent }) {
 
       {/* Sidebar for mobile */}
       {showSidebar && (
-    <div className="lg:hidden bg-white fixed inset-y-0 left-0 z-50 w-1/3 transform transition-transform ease-in-out duration-300">
+    <div className="lg:hidden bg-white fixed inset-y-0 left-0 z-50 w-64 transform transition-transform ease-in-out duration-300">
           <div className="flex justify-end p-4">
             <button
               onClick={() => setShowSidebar(false)}

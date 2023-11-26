@@ -1,17 +1,19 @@
 import React from 'react';
 
-function Sidebar() {
+function Filter() {
   return (
-    <div className="w-1/5 bg-gray-800 text-white p-4">
-      <h2 className="text-xl font-bold mb-4">Menu</h2>
-      <ul className="space-y-2">
-        <li>Dashboard</li>
-        <li>Analytics</li>
-        <li>Reports</li>
-        <li>Settings</li>
-      </ul>
+    <div className="p-4">
+      <button className="bg-white text-sky-800 px-4 py-2 rounded-2xl shadow-md mr-4">
+        Filter 1
+      </button>
+      <button className="bg-white text-sky-800 px-4 py-2 rounded-2xl shadow-md mr-4">
+        Filter 2
+      </button>
+      <button className="bg-white text-sky-800 px-4 py-2 rounded-2xl shadow-md mr-4">
+        Filter 3
+      </button>
     </div>
   );
 }
 
-export default Sidebar;
+export default Filter;

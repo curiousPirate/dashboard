@@ -10,10 +10,11 @@ function Layout() {
   return (
     <div className="flex h-screen">
       <Sidebar setDisplayContent={setDisplayContent} />
-      <div className="flex-1 flex flex-col">
+      <div className=" flex flex-col w-full">
         <Header />
+        <Filter />
         <div className="flex flex-col md:flex-row">
-          <Filter />
+          
           <MainData content={displayContent} />
         </div>
       </div>

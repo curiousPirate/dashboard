@@ -1,40 +1,39 @@
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
-import Layout from "./Layout";
-import Login from "./Login";
-import { lazy } from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import PrivateRoute from "./PrivateRoutes";
+import PublicRoute from "./PublicRoutes";
 
-// Lazy loaded components
-const ForgotPassword = lazy(() => import("./ForgotPassword"));
-const ResetPassword = lazy(() => import("./ResetPassword"));
+function checkAuth() {
+  // Get the access token from storage (e.g., localStorage)
+  const token = localStorage.getItem('token');
+
+  // Check if token exists
+  if (!token) {
+    return false; // Not logged in
+  }
+
+  // Decode the token (optional)
+  // You can use a library like JWT-decode to achieve this
+  // const decodedToken = jwtDecode(token);
+
+  // Check if token is expired (if JWT or similar token)
+  // This check assumes the token has an "exp" claim containing the expiry timestamp
+  // if (decodedToken && decodedToken.exp < Date.now() / 1000) {
+  //   return false; // Token expired
+  // }
+
+  // If token exists and is not expired, consider it valid
+  return true;
+}
 
 
-
-// Function to check authentication
-const isAuthenticated = () => {
-  const token = localStorage.getItem("token");
-  return !!token; // Check if token exists
-};
-
-// Private routes definition
-const privateRoutes = () => {
-  return {
-    element: isAuthenticated() ? <Layout /> : <Navigate to="/login" />,
-    children: [{ path: '/layout', element: <Layout /> }],
-  };
-};
-
-// Public routes definition
-const publicRoutes = () => {
-  return [
-    { path: "/", element: <Login /> },
-    { path: "/forgot-password", element: <ForgotPassword /> },
-    { path: "/reset-password", element: <ResetPassword /> },
-  ];
-};
-
+// App component
 function App() {
-  const router = createBrowserRouter([...publicRoutes(), privateRoutes()]);
-
+  // Combine and conditionally include routes based on authentication status
+  const router = createBrowserRouter([
+    checkAuth() ? PrivateRoute() : {},
+    ...PublicRoute(),
+  ]);
+  // Provide the router configuration using RouterProvider
   return <RouterProvider router={router} />;
 }
 

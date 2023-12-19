@@ -1,20 +1,101 @@
-import { useState, createContext, useContext } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-// Create a context to manage authentication state
-const AuthContext = createContext();
+export const AuthContext = createContext(); // Creating the context outside the AuthProvider
 
-// A provider component to wrap your app and manage authentication state
+export const useAuth = () => {
+  return useContext(AuthContext);
+};
+
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(/* Logic to check if user is logged in */ false);
+  const [authenticated, setAuthenticated] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate();
+
+  const handleLogin = async ({ username, password }) => {
+
+    const endpoint = '/user/login';
+    const body = { username, password };
+
+    try {
+      const response = await fetch(`http://localhost:4000${endpoint}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (response.ok) {
+        const { token } = await response.json();
+        localStorage.setItem('token', token);
+        setAuthenticated(true);
+        navigate('/layout');
+      } else {
+        const errorMessage = await response.text();
+        setErrorMessage(errorMessage);
+      }
+    } catch (error) {
+      console.error('Network error:', error.message);
+      setErrorMessage('Network error. Please try again.');
+    }
+  };
+
+  const handleLogout = () => {
+    setAuthenticated(false);
+    localStorage.removeItem('token');
+    navigate('/login');
+  };
+
+  const checkAuthStatus = async () => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      try {
+        const response = await fetch(`http://localhost:4000/user/me`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (response.ok) {
+          setAuthenticated(true);
+        } else {
+          localStorage.removeItem('token');
+          setAuthenticated(false);
+        }
+      } catch (error) {
+        console.error('Error checking auth status:', error.message);
+      }
+    }
+  };
+
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <AuthContext.Provider
+      value={{
+        authenticated,
+        errorMessage,
+        username,
+        password,
+        setUsername,
+        setPassword,
+        handleLogin,
+        handleLogout,
+        checkAuthStatus,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
 };
 
-// A custom hook to access the authentication context
-export const useAuth = () => {
-  return useContext(AuthContext);
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
+

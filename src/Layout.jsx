@@ -1,25 +1,13 @@
-import { useState } from 'react';
-import Sidebar from './Sidebar';
-import Header from './Header';
-import Filter from './Filter';
-import MainData from './MainData';
+import { Outlet } from "react-router-dom";
+import { Suspense } from "react";
 
-function Layout() {
-  const [displayContent, setDisplayContent] = useState('Default Content');
 
+export default function Layout() {
   return (
-    <div className="flex h-screen">
-      <Sidebar setDisplayContent={setDisplayContent} />
-      <div className=" flex flex-col w-full">
-        <Header />
-        <Filter />
-        <div className="flex flex-col md:flex-row">
-          
-          <MainData content={displayContent} />
-        </div>
-      </div>
-    </div>
+    <>
+      <Suspense>
+        <Outlet />
+      </Suspense>
+    </>
   );
 }
-
-export default Layout;
